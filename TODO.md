@@ -1,4 +1,4 @@
-# fourlegs-ai-edu TODO
+# EduGenie AI TODO
 
 ## Phase 1 — Design system (tokens + utilities + typography)
 - [x] Update `src/app/globals.css` with cyberpunk tokens + utilities (glass/neon/glow/gradient/spotlight/noise/grid)

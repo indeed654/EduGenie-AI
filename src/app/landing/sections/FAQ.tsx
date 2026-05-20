@@ -6,7 +6,8 @@ import { useState } from "react";
 
 const faqs = [
   {
-    q: "Is FourLegs AI EDU actually useful or just UI?",
+    q: "Is EduGenie AI actually useful or just UI?",
+
     a: "Useful. You get AI-structured notes, PYQ drill flow, revision planning, and analytics that map to what you’re weak at.",
   },
   {

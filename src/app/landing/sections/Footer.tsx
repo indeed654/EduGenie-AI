@@ -7,7 +7,8 @@ export function LandingFooter() {
         <div className="glass-card neon-border rounded-3xl p-6">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
-              <div className="text-sm font-semibold">FourLegs AI EDU</div>
+              <div className="text-sm font-semibold">EduGenie AI</div>
+
               <div className="mt-1 text-xs text-[#94A3B8]">
                 Premium cyberpunk learning system for notes, PYQs, and revision analytics.
               </div>
@@ -27,7 +28,8 @@ export function LandingFooter() {
         </div>
 
         <div className="mt-5 text-center text-xs text-[#94A3B8]">
-          © {new Date().getFullYear()} FourLegs AI EDU. Built for streaks.
+          © {new Date().getFullYear()} EduGenie AI. Built for students. Powered by AI.
+
         </div>
       </div>
     </footer>

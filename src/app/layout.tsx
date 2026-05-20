@@ -22,7 +22,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FourLegs AI Edu",
+  title: "EduGenie AI",
   description:
     "Premium cyberpunk academic platform — AI notes, PYQs, syllabus tracking and exam preparation.",
 };
