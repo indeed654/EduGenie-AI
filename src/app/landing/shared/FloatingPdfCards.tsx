@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
+
+
 
 const pdfCards = [
   { id: 1, title: "AI Notes", subtitle: "Auto-structured", x: "-10%", y: "-5%" },

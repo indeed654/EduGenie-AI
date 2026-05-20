@@ -1,24 +1,21 @@
 "use client";
 
-import { ReactNode, useEffect, useMemo, useState } from "react";
-import { Providers } from "./providers";
+import { useEffect, useState, type ReactNode } from "react";
+import { ThemeSpotlight } from "../components/shared/ThemeSpotlight";
 
 export default function LayoutShell({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const id = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(id);
   }, []);
 
-  // Respect system dark mode by default; allow CSS-based theming transitions.
-  const themeClass = useMemo(() => {
-    if (!mounted) return "";
-    return "dark";
-  }, [mounted]);
 
   return (
-    <div className={themeClass}>
-      <Providers>{children}</Providers>
+    <div className="relative min-h-screen">
+      <ThemeSpotlight enabled={mounted} />
+      {children}
     </div>
   );
 }

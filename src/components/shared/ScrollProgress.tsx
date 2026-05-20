@@ -1,0 +1,21 @@
+"use client";
+
+import { motion, useScroll, useSpring } from "framer-motion";
+
+export function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 40 });
+
+  return (
+    <motion.div
+      aria-hidden="true"
+      className="fixed left-0 top-0 z-[9999] h-[2px] w-full bg-transparent"
+    >
+      <motion.div
+        className="h-full bg-[#00F5FF] shadow-[0_0_20px_rgba(0,245,255,0.35)]"
+        style={{ width: progress }}
+      />
+    </motion.div>
+  );
+}
+

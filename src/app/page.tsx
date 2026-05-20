@@ -1,8 +1,7 @@
-import dynamic from "next/dynamic";
-
-const Landing = dynamic(() => import("./landing/Landing"), { ssr: false });
+import Landing from "./landing/Landing";
 
 export default function HomePage() {
   return <Landing />;
 }
+
 

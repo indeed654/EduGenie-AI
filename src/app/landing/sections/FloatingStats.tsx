@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 
+
 function useCounter(target: number, startWhenInView: boolean) {
   const [value, setValue] = useState(0);
 
@@ -34,39 +35,69 @@ const cards = [
   { label: "Subjects", value: 100, suffix: "+" },
 ];
 
-export function FloatingStats() {
-  const reduced = useReducedMotion();
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.25 });
+function StatCard({
+  label,
+  value,
+  suffix,
+  idx,
+  inView,
+  reduced,
+}: {
+  label: string;
+  value: number;
+  suffix: string;
+  idx: number;
+  inView: boolean;
+  reduced: boolean;
+}) {
+  const v = useCounter(value, inView);
 
   return (
-    <section ref={ref as any} className="relative">
+    <motion.div
+      initial={{ opacity: 0, y: 18, filter: "blur(8px)" }}
+      animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 18, filter: inView ? "blur(0px)" : "blur(8px)" }}
+      transition={{ duration: reduced ? 0 : 0.55, delay: reduced ? 0 : idx * 0.05, ease: "easeOut" }}
+      whileHover={{ scale: 1.02 }}
+      className="group relative overflow-hidden rounded-[26px] border border-white/10 bg-white/5 p-5 backdrop-blur"
+    >
+      <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <div className="absolute -left-10 -top-10 h-40 w-40 rounded-full bg-[#00F5FF]/10 blur-2xl" />
+        <div className="absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-[#FF00C8]/10 blur-2xl" />
+      </div>
+      <div className="relative">
+        <div className="text-4xl font-bold tracking-tight">
+          {v}
+          <span className="text-[#94A3B8]">{suffix}</span>
+        </div>
+        <div className="mt-2 text-sm text-[#94A3B8]">{label}</div>
+      </div>
+      <div className="mt-4 h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+    </motion.div>
+  );
+}
+
+export function FloatingStats() {
+  const reduced = !!useReducedMotion();
+
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.25 });
+
+  const inViewBool = Boolean(inView);
+
+
+  return (
+    <section ref={ref} className="relative">
       <div className="grid gap-4 md:grid-cols-4">
-        {cards.map((c, idx) => {
-          const v = useCounter(c.value, !!inView);
-          return (
-            <motion.div
-              key={c.label}
-              initial={{ opacity: 0, y: 18, filter: "blur(8px)" }}
-              animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 18, filter: inView ? "blur(0px)" : "blur(8px)" }}
-              transition={{ duration: reduced ? 0 : 0.55, delay: reduced ? 0 : idx * 0.05, ease: "easeOut" }}
-              whileHover={{ scale: 1.02 }}
-              className="group relative overflow-hidden rounded-[26px] border border-white/10 bg-white/5 p-5 backdrop-blur"
-            >
-              <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <div className="absolute -left-10 -top-10 h-40 w-40 rounded-full bg-[#00F5FF]/10 blur-2xl" />
-                <div className="absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-[#FF00C8]/10 blur-2xl" />
-              </div>
-              <div className="relative">
-                <div className="text-4xl font-bold tracking-tight">
-                  {v}
-                  <span className="text-[#94A3B8]">{c.suffix}</span>
-                </div>
-                <div className="mt-2 text-sm text-[#94A3B8]">{c.label}</div>
-              </div>
-              <div className="mt-4 h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-            </motion.div>
-          );
-        })}
+        {cards.map((c, idx) => (
+          <StatCard
+            key={c.label}
+            label={c.label}
+            value={c.value}
+            suffix={c.suffix}
+            idx={idx}
+            inView={inViewBool}
+            reduced={reduced}
+          />
+        ))}
       </div>
     </section>
   );

@@ -1,17 +1,16 @@
-# fourlegs-ai-edu Frontend Build (Premium Cyberpunk)
+# fourlegs-ai-edu TODO
 
-## Plan / Steps
-- [ ] 1. Setup core app providers + global theme: Cyberpunk colors, fonts, dark mode.
-- [ ] 2. Add Tailwind custom utilities (glow borders, glass, gradients) and global animated background.
-- [ ] 3. Implement shared layout shell: futuristic top nav + sidebar/quick switcher.
-- [ ] 4. Create Landing page at `/` with all requested sections and interactive effects.
-- [ ] 5. Create pages: `/notes`, `/pyq`, `/dashboard`, `/community`, `/internships`, `/profile`, `/settings`.
-- [ ] 6. Build smart search component (animated bar, filters, voice UI placeholder).
-- [ ] 7. Build dashboard preview components (streak, progress, charts, leaderboard).
-- [ ] 8. Add premium motion primitives: staggered reveals, route transitions, magnetic buttons, spotlight, particles, skeletons, counters.
-- [ ] 9. Add React Three Fiber scene (optional graceful fallback if disabled) and wire to landing hero.
-- [ ] 10. Verify accessibility: keyboard nav, ARIA labels, focus rings.
-- [ ] 11. Verify performance: lazy loading, dynamic imports, Lighthouse-target-friendly approach.
-- [ ] 12. Add PWA-ready structure (service worker scaffold if using next-pwa later).
+## Phase 1 — Design system (tokens + utilities + typography)
+- [x] Update `src/app/globals.css` with cyberpunk tokens + utilities (glass/neon/glow/gradient/spotlight/noise/grid)
+- [x] Add font loading variables for Space Grotesk, Inter, JetBrains Mono in `src/app/layout.tsx`
 
+## Phase 2 — Global foundation
+- [x] Upgrade `src/app/providers.tsx` with Lenis smooth scrolling + scroll progress + animation wrapper
+- [x] Update `src/app/layout-shell.tsx` to mount global spotlight layer
+- [ ] Add loading screen + skeleton system scaffolding
+
+## Phase 3+ (next)
+- [ ] Create full component architecture folder tree
+- [ ] Implement landing premium composition fully + all missing sections
+- [ ] Implement remaining routes
 

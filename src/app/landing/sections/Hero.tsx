@@ -1,114 +1,137 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, BadgeCheck, LineChart, Timer } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
-const FloatingPdfCards = dynamic(
-  () => import("../shared/FloatingPdfCards"),
-  { ssr: false }
-);
-const MouseSpotlight = dynamic(
-  () => import("../shared/MouseSpotlight"),
-  { ssr: false }
-);
+const FloatingPdfCards = dynamic(() => import("../shared/FloatingPdfCards"), {
+  ssr: false,
+});
 
 export function LandingHero() {
   const reduced = useReducedMotion();
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   return (
     <section className="relative">
-      <MouseSpotlight enabled={!reduced && mounted} />
-
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-10">
-        <div className="relative pt-20 sm:pt-28">
-          <motion.div
-            initial={{ opacity: 0, y: 22, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: reduced ? 0 : 0.7, ease: "easeOut" }}
-          >
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur">
-              <span className="flex h-2 w-2">
-                <span className="relative h-2 w-2 rounded-full bg-[#00F5FF] shadow-[0_0_18px_#00F5FF]" />
-              </span>
-              <span className="text-xs sm:text-sm text-[#94A3B8]">
-                Premium AI study OS • Cyberpunk academic suite
-              </span>
-            </div>
+        <div className="relative grid gap-10 pt-20 sm:pt-28 lg:grid-cols-[1fr_420px] lg:items-start">
+          {/* LEFT: Product-grade hero */}
+          <div className="max-w-[680px]">
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: reduced ? 0 : 0.35, ease: [0.2, 0.8, 0.2, 1] }}
+            >
+              <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(0,0,0,0.06)] bg-white/60 px-4 py-2 shadow-[0_1px_0_rgba(0,0,0,0.02)] backdrop-blur">
+                <BadgeCheck className="h-4 w-4 text-[#4F46E5]" />
+                <span className="text-xs sm:text-sm text-[#6B7280]">
+                  Learning infrastructure built for engineers
+                </span>
+              </div>
 
-            <h1 className="mt-6 text-7xl font-bold tracking-tight sm:text-7xl">
-              <span className="bg-gradient-to-r from-[#F8FAFC] via-[#00F5FF] to-[#FF00C8] bg-clip-text text-transparent">
-                Study Smarter.
-              </span>{" "}
-              Score Better.
-              <br />
-              Learn Faster.
-            </h1>
+              <h1 className="mt-7 text-[64px] leading-[1.02] font-semibold tracking-[-0.03em] sm:text-[72px]">
+                Learn faster.
+                <br />
+                Revise smarter.
+              </h1>
 
-            <p className="mt-5 max-w-2xl text-sm sm:text-base text-[#94A3B8]">
-              AI-powered notes, PYQs, syllabus tracking and exam preparation.
-              Built for streaks, insights, and confidence.
-            </p>
+              <p className="mt-5 text-[16px] leading-relaxed text-[#6B7280] max-w-[560px]">
+                AI-powered notes, PYQs, and syllabus tracking—organized for real study
+                systems. Built to keep you consistent, confident, and exam-ready.
+              </p>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <motion.a
-                whileHover={{ y: -2, scale: 1.02 }}
-                whileTap={{ scale: 0.99 }}
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold backdrop-blur shadow-[0_0_30px_rgba(124,58,237,0.25)]"
-                href="#explore"
-                aria-label="Explore Notes"
-              >
-                <Sparkles className="h-4 w-4 text-[#00F5FF] drop-shadow-[0_0_12px_#00F5FF]" />
-                Explore Notes
-                <ArrowRight className="h-4 w-4 opacity-80 transition group-hover:translate-x-0.5" />
-              </motion.a>
-
-              <motion.a
-                whileHover={{ y: -2, scale: 1.02 }}
-                whileTap={{ scale: 0.99 }}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#7C3AED] via-[#00F5FF] to-[#FF00C8] px-6 py-3 text-sm font-semibold text-[#050816] shadow-[0_0_42px_rgba(124,58,237,0.5)]"
-                href="/dashboard"
-                aria-label="Start Learning"
-              >
-                Start Learning
-                <ArrowRight className="h-4 w-4" />
-              </motion.a>
-            </div>
-
-            <div className="mt-8 grid gap-3 sm:grid-cols-3">
-              {[
-                { label: "AI Notes", sub: "Auto-structured" },
-                { label: "PYQ Turbo", sub: "Smart drill" },
-                { label: "Revision Planner", sub: "Streak-ready" },
-              ].map((item, i) => (
-                <motion.div
-                  key={item.label}
-                  initial={{ opacity: 0, y: 14, filter: "blur(8px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  transition={{
-                    duration: reduced ? 0 : 0.5,
-                    delay: reduced ? 0 : 0.1 + i * 0.08,
-                    ease: "easeOut",
-                  }}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur"
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <motion.a
+                  whileHover={!reduced ? { y: -1 } : undefined}
+                  whileTap={!reduced ? { y: 0, scale: 0.99 } : undefined}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-[14px] bg-[#111827] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1F2937] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5]"
+                  href="#"
+                  aria-label="Explore learning"
                 >
-                  <div className="text-sm font-semibold">{item.label}</div>
-                  <div className="mt-1 text-xs text-[#94A3B8]">{item.sub}</div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+                  Explore learning
+                  <ArrowRight className="h-4 w-4" />
+                </motion.a>
 
-          <div className="relative mt-12">
-            <FloatingPdfCards />
+                <motion.a
+                  whileHover={!reduced ? { y: -1 } : undefined}
+                  whileTap={!reduced ? { y: 0, scale: 0.99 } : undefined}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-[14px] border border-[#E5E7EB] bg-white px-6 py-3 text-sm font-semibold text-[#111827] transition-colors hover:bg-[#F3F4F6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5]"
+                  href="/dashboard"
+                  aria-label="Go to dashboard"
+                >
+                  Go to dashboard
+                  <ArrowRight className="h-4 w-4" />
+                </motion.a>
+              </div>
+
+              {/* Trust metrics */}
+              <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                {[{
+                  icon: LineChart,
+                  label: "52,814",
+                  caption: "Students learning",
+                }, {
+                  icon: Timer,
+                  label: "94.3%",
+                  caption: "Semester confidence",
+                }, {
+                  icon: BadgeCheck,
+                  label: "1.2M",
+                  caption: "PYQs solved",
+                }].map((m, idx) => {
+                  const Icon = m.icon;
+                  return (
+                    <motion.div
+                      key={m.caption}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: mounted ? 1 : 0, y: 0 }}
+                      transition={{
+                        duration: reduced ? 0 : 0.28,
+                        delay: reduced ? 0 : idx * 0.06,
+                        ease: [0.2, 0.8, 0.2, 1],
+                      }}
+                      className="rounded-[20px] border border-[rgba(0,0,0,0.06)] bg-white px-5 py-4 shadow-[0_2px_10px_rgba(0,0,0,0.04)]"
+                    >
+                      <div className="flex items-center gap-2">
+                        <Icon className="h-4 w-4 text-[#4F46E5]" />
+                        <div className="text-[22px] font-semibold tracking-[-0.01em] text-[#111827]">
+                          {m.label}
+                        </div>
+                      </div>
+                      <div className="mt-1 text-[14px] text-[#6B7280] leading-snug">
+                        {m.caption}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* RIGHT: dashboard preview mock */}
+          <div className="relative">
+            <div className="absolute -inset-4 rounded-[24px] bg-gradient-to-b from-[#4F46E5]/10 to-transparent blur-[18px] pointer-events-none" />
+            <div className="rounded-[24px] border border-[#E5E7EB] bg-white shadow-[0_2px_10px_rgba(0,0,0,0.04)] overflow-hidden">
+              <div className="p-4 border-b border-[#E5E7EB] flex items-center justify-between">
+                <div className="text-[14px] font-medium text-[#6B7280]">Today&apos;s study system</div>
+                <div className="text-[12px] font-semibold text-[#111827]">Exam in 12 days</div>
+              </div>
+              <div className="p-4">
+                <FloatingPdfCards />
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
+
 
