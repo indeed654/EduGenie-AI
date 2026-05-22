@@ -7,7 +7,7 @@ export function DashboardPreview() {
   const reduced = useReducedMotion();
 
   return (
-    <section aria-label="Dashboard Preview" className="relative">
+<section id="dashboard-preview" aria-label="Dashboard Preview" className="relative">
       <div className="flex items-end justify-between gap-4">
         <div>
           <h2 className="text-4xl font-semibold">Dashboard Preview</h2>

@@ -52,10 +52,10 @@ export function LandingHero() {
                   whileHover={!reduced ? { y: -1 } : undefined}
                   whileTap={!reduced ? { y: 0, scale: 0.99 } : undefined}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-[14px] bg-[#111827] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1F2937] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5]"
-                  href="#"
-                  aria-label="Explore learning"
+                  href="/signup"
+                  aria-label="Start Learning Free"
                 >
-                  Explore learning
+                  Start Learning Free
                   <ArrowRight className="h-4 w-4" />
                 </motion.a>
 
@@ -63,29 +63,37 @@ export function LandingHero() {
                   whileHover={!reduced ? { y: -1 } : undefined}
                   whileTap={!reduced ? { y: 0, scale: 0.99 } : undefined}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-[14px] border border-[#E5E7EB] bg-white px-6 py-3 text-sm font-semibold text-[#111827] transition-colors hover:bg-[#F3F4F6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5]"
-                  href="/dashboard"
-                  aria-label="Go to dashboard"
+href="/dashboard"
+                  aria-label="View demo"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById("dashboard-preview")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
                 >
-                  Go to dashboard
+                  View Demo
                   <ArrowRight className="h-4 w-4" />
                 </motion.a>
               </div>
 
               {/* Trust metrics */}
               <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                {[{
-                  icon: LineChart,
-                  label: "52,814",
-                  caption: "Students learning",
-                }, {
-                  icon: Timer,
-                  label: "94.3%",
-                  caption: "Semester confidence",
-                }, {
-                  icon: BadgeCheck,
-                  label: "1.2M",
-                  caption: "PYQs solved",
-                }].map((m, idx) => {
+                {[
+                  {
+                    icon: LineChart,
+                    label: "52,814",
+                    caption: "Students learning",
+                  },
+                  {
+                    icon: Timer,
+                    label: "94.3%",
+                    caption: "Semester confidence",
+                  },
+                  {
+                    icon: BadgeCheck,
+                    label: "1.2M",
+                    caption: "PYQs solved",
+                  },
+                ].map((m, idx) => {
                   const Icon = m.icon;
                   return (
                     <motion.div
@@ -133,5 +141,4 @@ export function LandingHero() {
     </section>
   );
 }
-
 

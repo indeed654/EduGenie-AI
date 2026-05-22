@@ -55,6 +55,10 @@ export function SmartSearch() {
               className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#7C3AED] via-[#00F5FF] to-[#FF00C8] px-5 py-3 text-sm font-semibold text-[#050816] shadow-[0_0_42px_rgba(124,58,237,0.5)]"
               type="button"
               aria-label="Search"
+              onClick={() => {
+                const q = query.trim();
+                window.location.href = `/materials${q ? `?query=${encodeURIComponent(q)}` : ""}`;
+              }}
             >
               <Sparkles className="h-4 w-4" />
               Search
@@ -66,6 +70,11 @@ export function SmartSearch() {
               className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-4 py-3"
               type="button"
               aria-label="Voice search"
+              onClick={() => {
+                // Demo: bring user to search results with current query.
+                const q = query.trim();
+                window.location.href = `/materials${q ? `?query=${encodeURIComponent(q)}` : ""}`;
+              }}
             >
               <Mic className="h-4 w-4 text-[#00F5FF]" />
             </motion.button>

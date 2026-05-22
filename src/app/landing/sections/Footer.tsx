@@ -14,13 +14,13 @@ export function LandingFooter() {
               </div>
             </div>
             <div className="flex gap-3">
-              <a className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-[#94A3B8] hover:text-[#F8FAFC]" href="#">
+<a className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-[#94A3B8] hover:text-[#F8FAFC]" href="/privacy">
                 Privacy
               </a>
-              <a className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-[#94A3B8] hover:text-[#F8FAFC]" href="#">
+<a className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-[#94A3B8] hover:text-[#F8FAFC]" href="/terms">
                 Terms
               </a>
-              <a className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-[#94A3B8] hover:text-[#F8FAFC]" href="#">
+<a className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-[#94A3B8] hover:text-[#F8FAFC]" href="/contact">
                 Contact
               </a>
             </div>

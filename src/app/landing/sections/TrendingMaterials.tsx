@@ -27,10 +27,22 @@ export function TrendingMaterials() {
         <div className="flex gap-4">
           {materials.map((m, idx) => {
             const Icon = m.icon;
+            // map each title to a stable slug route
+            const slug =
+              m.title === "Physics PYQ Set"
+                ? "physics-pyq"
+                : m.title === "Data Structures"
+                  ? "data-structures"
+                  : m.title === "Organic Chemistry"
+                    ? "organic-chemistry"
+                    : m.title === "Math Short Notes"
+                      ? "math-shortnotes"
+                      : "mock-tests";
+
             return (
               <motion.a
                 key={m.title}
-                href="#"
+                href={`/materials/${slug}`}
                 whileHover={{ scale: 1.03, y: -6 }}
                 transition={{ duration: reduced ? 0 : 0.25, delay: idx * 0.01 }}
                 className="group relative w-[280px] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur"
